@@ -1,6 +1,7 @@
 import { describe, test, expect,} from 'vitest'
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Form from "./form.tsx";
+  import { UserContext } from "../context/user-context.tsx";
 
 describe('<Form />', () => {
   test('The input field and its props', () => {
@@ -37,5 +38,25 @@ describe('<Form />', () => {
       // test the required prop with the jest-dom
       expect(input).toBeRequired()
     }
+  });
+
+  test('The User Context', () => {
+    // Test the user context directly
+    // changing the user value
+    const value = {
+      user: 'jane@doe.com',
+      addEmail: () => {}
+    }
+    
+    render(
+      <UserContext.Provider value={value}>
+        <Form />
+      </UserContext.Provider>
+    )
+    
+    // Check if the user is displaying in the Dom.
+    expect(screen.getByTestId(/^user/).textContent).toBe(
+      'jane@doe.com',
+    )
   });
 });

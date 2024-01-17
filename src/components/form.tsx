@@ -1,35 +1,43 @@
 
 import { ChangeEvent, FormEvent, useState } from "react";
 import FormInput from "./form-input";
+import { useContext } from "react";
+import { UserContext } from "../context/user-context";
+
 
 const Form = () => {
   const [email, setEmail] = useState<string>('')
   
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    try {
-      setEmail('')
-    } catch (error) {
-      console.log(error)
-    }
-  };
+  const { user, addEmail } = useContext(UserContext)
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {  
+      event.preventDefault()
+      try {
+        addEmail(email)
+        setEmail('')
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value)
+    }
+
+    return(
+      <form onSubmit={handleSubmit}>
+        {/* Check the user email is display here */}
+        <div data-testid="user">{ user }</div>
+        <FormInput
+          type="email" 
+          name="email"
+          value={email}
+          onChange={handleChange}
+          required
+        />
+        <button type='submit'>Submit</button>
+      </form>
+    )
   }
 
-  return(
-    <form onSubmit={handleSubmit}>
-      <FormInput
-        type="email" 
-        name="email"
-        value={email}
-        onChange={handleChange}
-        required
-      />
-      <button type='submit'>Submit</button>
-    </form>
-  )
-}
-
-export default Form;
+  export default Form;

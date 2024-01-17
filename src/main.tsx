@@ -7,11 +7,12 @@ import {
   RouterProvider 
 } from "react-router-dom"
 import About from './routes/about'
+import { UserProvider } from './context/user-context.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/vite-deploy-2",
-    element: <App />,
+    element: <UserProvider><App /></UserProvider>,
   },
   {
     path: "/vite-deploy-2/about/",
