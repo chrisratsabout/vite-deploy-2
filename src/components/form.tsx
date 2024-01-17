@@ -27,6 +27,7 @@ const Form = () => {
     return(
       <form onSubmit={handleSubmit}>
         {/* Check the user email is display here */}
+        <h1>Form title</h1>
         <div data-testid="user">{ user }</div>
         <FormInput
           type="email" 
