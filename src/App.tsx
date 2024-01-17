@@ -30,7 +30,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <nav>
-        <Link to="about/">About Link</Link>
+        <Link to="about/">About</Link>
       </nav>
     </>
   )
