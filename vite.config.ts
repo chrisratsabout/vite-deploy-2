@@ -9,6 +9,26 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     setupFiles: ['src/setupTest.ts'],
-    
+    coverage: {
+              exclude: [
+                '**/*.d.ts',
+                '**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
+                'src/router/**',
+                'src/config/**',
+                'src/types/**',
+                'src/main.tsx',
+                'src/routes/about.tsx',
+                'src/context/user-context.tsx'
+              ],
+              provider: 'v8',
+              reporter: ['text', 'json-summary', 'json', 'html'],
+              reportOnFailure: true,
+              thresholds: {
+                lines: 70,
+                functions: 70,
+                branches: 70,
+                statements: 70,
+              },
+            }
   },
 })
